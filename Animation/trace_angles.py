@@ -24,6 +24,8 @@ def show_anim(p1):
     ax.set_xlim(-0.45, 0.45)
     ax.spines['left'].set_position('center')
     ax.spines['bottom'].set_position('center')
+    # ax.patch.set_edgecolor('black')  
+    # ax.patch.set_linewidth('1')  
 
     time_template = 'time : %.1fs'
     time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -37,10 +39,11 @@ def show_anim(p1):
                                   frames=int(p1.num_frames),
                                   interval=10, repeat=False)  # 30 -> 500
 
+    # FFwriter = animation.FFMpegWriter()
     # Uncomment function to save animation as a gif
-    # ani.save('pendulums.gif', writer='pillow', fps=len(t[t < 1]))
+    ani.save('trace_angles_long.gif', writer='pillow', fps=25)
 
-    plt.show()
+    # plt.show()
 
 
 if __name__ == "__main__":
@@ -48,5 +51,5 @@ if __name__ == "__main__":
     eps = np.pi / 20
     y1 = [eps, 0, eps, 0]
     p1 = Pendulum(theta1=y1[0], z1=y1[1], theta2=y1[2], z2=y1[3], y0=y1,
-                  method='RK23', to_trace=True, trace_delete=False, tmax=200)
+                  method='RK23', to_trace=True, trace_delete=False, tmax=250)
     show_anim(p1)

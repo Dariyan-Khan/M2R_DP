@@ -84,9 +84,9 @@ def show_anim(p1, p2):
                                   interval=50, repeat=False)  # 30 -> 500
 
     # Uncomment function to save animation as a gif
-    # ani.save('pendulums.gif', writer='pillow', fps=len(t[t < 1]))
+    ani.save('pendulum_flip_2.gif', writer='pillow', fps=25) #, fps=len(t[t < 1]))
 
-    plt.show()
+    # plt.show()
 
 
 if __name__ == "__main__":
@@ -95,14 +95,14 @@ if __name__ == "__main__":
     # y0 = np.array([np.pi, 0, np.pi/2, 0])
     # y1 = np.array([np.pi/7 + eps, 0, np.pi/7 + eps, 0])
 
-    th1 = np.pi
-    th2 = np.pi / 2
+    th1 = np.pi / 10
+    th2 = np.sqrt(2) * th1 # np.pi / 2
 
-    y1 = [th1, 0, th2, 0]
+    y1 = [3, 0, 3, 0]
     y2 = [th1+eps, 0, th2+eps, 0]
-    p1 = Pendulum(theta1=y1[0], z1=y1[1], theta2=y1[2], z2=y1[3], y0=y1, method='RK23', to_trace=False, trace_delete=False, tmax=200)
-    p2 = Pendulum(theta1=y2[0], z1=y2[1], theta2=y2[2], z2=y2[3], y0=y2, method='RK23', to_trace=False, trace_delete=False, tmax=200)
-    start_energy = total_Energy(p1, p2, start = True) # noqa
+    p1 = Pendulum(theta1=y1[0], z1=y1[1], theta2=y1[2], z2=y1[3], y0=y1, method='RK23', to_trace=False, trace_delete=False, tmax=7)
+    p2 = Pendulum(theta1=y2[0], z1=y2[1], theta2=y2[2], z2=y2[3], y0=y2, method='RK23', to_trace=False, trace_delete=False, tmax=50)
+    start_energy = total_Energy(p1, p1, start = True) # noqa
     print(start_energy)
     # print(p1.num_frames)
-    show_anim(p1, p2)
+    show_anim(p1, p1) # change back to p1, p2

@@ -26,7 +26,7 @@ def principal(x):
 def pendulum_vec(v, t):  # v = (th1, th1_dot, th2, th2_dot)
     y0 = [principal(v[0]), v[1], principal(v[2]), v[3]]
     return Pendulum(theta1=y0[0], z1=y0[1], theta2=y0[2], z2=y0[3], y0=y0,
-                    tmax=t, to_trace=False, trace_delete=False, method='RK23')
+                    tmax=t, to_trace=False, trace_delete=False)
 
 
 def initial_err_0(eps):
@@ -52,7 +52,7 @@ def lyp_exp(initial_cond, eps, tmax, T=1):
         lyp_ests.append((1/T) * (np.log(err1_norm) - np.log(err0_norm)))
         err_0 = (err_1 / err1_norm) * eps  # scaled err_1
 
-        print(calc_E(p1_state), "energy")
+        # print(calc_E(p1_state), "energy")
         p1 = pendulum_vec(p1_state, T)
         p2 = pendulum_vec(p1_state + err_0, T)
     return sum(lyp_ests) / len(lyp_ests)
